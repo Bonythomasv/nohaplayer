@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NOHA Player</string>
+    <string name="loading_channels">Loading channels...</string>
+    <string name="error_loading_channels">Error loading channels</string>
+    <string name="retry">Retry</string>
+    <string name="no_channels">No channels available</string>
+    <string name="channel_list">Channel List</string>
+    <string name="playback_error">Playback error occurred</string>
+    <string name="unknown_channel">Unknown Channel</string>
+</resources>
+
