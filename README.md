@@ -1,99 +1,29 @@
-# NohaPlayer
+# NOHA Player
 
-A modern Android IPTV streaming application that allows you to stream thousands of free channels from publicly available IPTV playlists.
+Lightweight IPTV player built with Jetpack Compose and Hilt. Supports HLS, favorites, playlists, categories, recents, parental PIN, start-on-boot, autoplay last, internal/external player toggle, cast button stub, and hide/remove broken channels. DataStore persists favorites, playlists, settings, and hidden items.
 
-## Features
+## What’s inside
+- Media3 ExoPlayer (+ HLS) with retry-friendly playback handling
+- Playlist manager (URL, Xtream, file), active playlist selector, recent playlists
+- Tabs: Favorites / All / Categories, with All-tab search and category dropdown filter
+- Category counts by group/country; recents list; favorites toggle
+- Parental lock/unlock, start on boot, autoplay last channel, hide/unhide channels
+- Disclaimer + privacy-policy stub; background image + NOHA Player branding
 
-- 📺 Stream thousands of free IPTV channels
-- 🎨 Modern Material Design 3 UI built with Jetpack Compose
-- 🔄 Automatic playlist fetching from iptv-org
-- 🎬 Full-screen video playback with ExoPlayer
-- 📱 Optimized for Android phones and tablets
-- ⚡ Fast channel loading with efficient M3U parsing
+## Build & run
+1) Android Studio (Hedgehog+), JDK 17, Android SDK 24+ / target 34  
+2) `./gradlew assembleDebug` or use Android Studio Run on device/emulator  
+3) To test boot/start and autoplay, enable in Settings dialog inside the app
 
-## Technology Stack
+## Play Store prep (short checklist)
+- Set app name, icon, screenshots, and privacy policy URL in Play Console
+- Generate signed AAB: `Build > Generate Signed Bundle / APK > Android App Bundle`
+- Use Play App Signing; keep keystore/credentials safe
+- Upload AAB, add content ratings, ads declaration (if any), target SDK 34, and roll out
 
-- **Language**: Kotlin
-- **UI Framework**: Jetpack Compose
-- **Architecture**: MVVM with StateFlow
-- **Dependency Injection**: Hilt
-- **Media Player**: ExoPlayer (Media3)
-- **Networking**: Retrofit + OkHttp
-- **Image Loading**: Coil
-
-## Project Structure
-
-```
-app/
-├── data/
-│   ├── model/          # Channel, Playlist data classes
-│   ├── parser/         # M3U playlist parser
-│   └── repository/     # Data repository and network service
-├── domain/
-│   └── usecase/        # Business logic (future)
-├── ui/
-│   ├── channel/        # Channel list screen
-│   ├── player/         # Video player screen
-│   └── theme/          # App theming
-└── di/                 # Dependency injection modules
-```
-
-## Setup Instructions
-
-1. **Clone or open the project** in Android Studio (Hedgehog or later)
-
-2. **Sync Gradle** - Android Studio will automatically download dependencies
-
-3. **Build the project** - Click "Build > Make Project" or press `Ctrl+F9` (Windows/Linux) or `Cmd+F9` (Mac)
-
-4. **Run the app** - Connect an Android device or start an emulator, then click "Run"
-
-## Requirements
-
-- Android Studio Hedgehog (2023.1.1) or later
-- Android SDK 24 (Android 7.0) or higher
-- Target SDK 34 (Android 14)
-- Java 17 or higher
-
-## How It Works
-
-1. The app fetches the M3U playlist from `https://iptv-org.github.io/iptv/index.m3u`
-2. The M3U parser extracts channel information (name, logo, stream URL, etc.)
-3. Channels are displayed in a scrollable list
-4. Tapping a channel opens the video player
-5. ExoPlayer handles streaming and playback
-
-## Building for Release
-
-1. Generate a signed APK or AAB:
-   - Build > Generate Signed Bundle / APK
-   - Follow the signing wizard
-
-2. For Play Store distribution:
-   - Generate an AAB (Android App Bundle)
-   - Upload to Google Play Console
-   - Ensure you comply with Play Store policies
-
-## Future Enhancements
-
-- EPG (Electronic Program Guide) integration
-- Favorites/bookmarks
-- Search functionality
-- Channel categories/filtering
-- Custom playlist URLs
-- Chromecast support
-- Picture-in-picture mode
-- Background playback
-
-## Legal Notice
-
-This app provides access to publicly available IPTV streams. The app itself does not host any content. All streams are sourced from publicly available playlists. Users are responsible for ensuring they have the right to access the content they stream.
+## Legal
+No built-in channels. User-supplied playlists only. Ensure you have rights to any content you stream.
 
 ## License
-
-This project is open source. See LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
+See LICENSE.
 

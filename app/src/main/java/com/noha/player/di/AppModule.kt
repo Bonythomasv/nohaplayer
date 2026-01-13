@@ -2,6 +2,8 @@ package com.noha.player.di
 
 import android.content.Context
 import com.noha.player.data.local.FavoritesStore
+import com.noha.player.data.local.PlaylistStore
+import com.noha.player.data.local.SettingsStore
 import com.noha.player.data.repository.IPTVRepository
 import com.noha.player.data.repository.IPTVService
 import dagger.Module
@@ -53,8 +55,11 @@ object AppModule {
     
     @Provides
     @Singleton
-    fun provideIPTVRepository(iptvService: IPTVService): IPTVRepository {
-        return IPTVRepository(iptvService)
+    fun provideIPTVRepository(
+        iptvService: IPTVService,
+        @ApplicationContext context: Context
+    ): IPTVRepository {
+        return IPTVRepository(iptvService, context)
     }
 
     @Provides
@@ -62,5 +67,17 @@ object AppModule {
     fun provideFavoritesStore(
         @ApplicationContext context: Context
     ): FavoritesStore = FavoritesStore(context)
+
+    @Provides
+    @Singleton
+    fun providePlaylistStore(
+        @ApplicationContext context: Context
+    ): PlaylistStore = PlaylistStore(context)
+
+    @Provides
+    @Singleton
+    fun provideSettingsStore(
+        @ApplicationContext context: Context
+    ): SettingsStore = SettingsStore(context)
 }
 

@@ -27,6 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class PlayerActivity : ComponentActivity() {
     
     private var exoPlayer: ExoPlayer? = null
+    private val maxRetries = 3
+    private var retryCount = 0
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -118,8 +120,18 @@ class PlayerActivity : ComponentActivity() {
         val message = when (error) {
             is PlaybackException -> {
                 when (val cause = error.cause) {
-                    is HttpDataSource.HttpDataSourceException ->
+                    is HttpDataSource.HttpDataSourceException -> {
+                        if (retryCount < maxRetries) {
+                            retryCount++
+                            exoPlayer?.apply {
+                                seekTo(0)
+                                prepare()
+                                playWhenReady = true
+                            }
+                            return
+                        }
                         "Stream unavailable or network blocked."
+                    }
                     else -> error.errorCodeName ?: "Playback error"
                 }
             }
